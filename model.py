@@ -45,7 +45,7 @@ class ConvSubsampling(nn.Module):
         return x
 
 class TinyConformer(nn.Module):
-    def __init__(self, input_dim=80, d_model=144, num_classes=35, num_blocks=4, dropout=0.1):
+    def __init__(self, input_dim=80, d_model=144, num_classes=8, num_blocks=4, dropout=0.1):
         super().__init__()
         self.specaug = SpecAugment()
         self.subsampling = ConvSubsampling(in_channels=1, out_dim=d_model)
