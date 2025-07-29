@@ -11,8 +11,8 @@ class SpecAugment(nn.Module):
         self.num_time_masks = num_time_masks
 
     def forward(self, x):
-    if not self.training:
-        return x  # Skip SpecAugment during evaluation
+        if not self.training:
+            return x  # Skip SpecAugment during evaluation
 
     # x: (B, 1, Freq, Time)
     for _ in range(self.num_freq_masks):
