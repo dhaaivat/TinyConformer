@@ -14,18 +14,18 @@ class SpecAugment(nn.Module):
         if not self.training:
             return x  # Skip SpecAugment during evaluation
 
-    # x: (B, 1, Freq, Time)
-    for _ in range(self.num_freq_masks):
-        freq_mask = torch.randint(0, self.freq_mask_param, (1,)).item()
-        f0 = torch.randint(0, x.size(2) - freq_mask, (1,)).item()
-        x[:, :, f0:f0+freq_mask, :] = 0
+        # x: (B, 1, Freq, Time)
+        for _ in range(self.num_freq_masks):
+            freq_mask = torch.randint(0, self.freq_mask_param, (1,)).item()
+            f0 = torch.randint(0, x.size(2) - freq_mask, (1,)).item()
+            x[:, :, f0:f0+freq_mask, :] = 0
 
-    for _ in range(self.num_time_masks):
-        time_mask = torch.randint(0, self.time_mask_param, (1,)).item()
-        t0 = torch.randint(0, x.size(3) - time_mask, (1,)).item()
-        x[:, :, :, t0:t0+time_mask] = 0
+        for _ in range(self.num_time_masks):
+            time_mask = torch.randint(0, self.time_mask_param, (1,)).item()
+            t0 = torch.randint(0, x.size(3) - time_mask, (1,)).item()
+            x[:, :, :, t0:t0+time_mask] = 0
 
-    return x
+        return x
 
 class ConvSubsampling(nn.Module):
     def __init__(self, in_channels=1, out_dim=144):
