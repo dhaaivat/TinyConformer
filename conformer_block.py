@@ -8,7 +8,7 @@ class FeedForwardModule(nn.Module):
         self.layer = nn.Sequential(
             nn.LayerNorm(d_model),
             nn.Linear(d_model, d_model * expansion_factor),
-            nn.Swish(),  # or GELU
+            nn.SiLU(),  # or GELU
             nn.Dropout(dropout),
             nn.Linear(d_model * expansion_factor, d_model),
             nn.Dropout(dropout),
